@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 1 · Bài 1–3 · Ôn tập (新HSK教程1)</title>
+<style>
+:root{--primary:#2c6e49;--primary-dark:#1b4332;--accent:#40916c;--bg:#f7faf8;--card:#fff;--text:#1a1a1a;--muted:#5c6b5e;--success:#2d8a4e;--error:#c0392b;--border:#d8e8dc;--radius:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1.3rem 1rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+header h1{font-size:1.4rem;font-weight:700;margin-bottom:.2rem}
+header p{opacity:.9;font-size:.88rem}
+.container{max-width:900px;margin:0 auto;padding:1rem}
+.lesson-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.lesson-btn{flex:1;min-width:100px;padding:.6rem;border:2px solid var(--border);background:#fff;border-radius:10px;font-weight:600;font-size:.9rem;cursor:pointer;color:var(--muted);transition:all .2s}
+.lesson-btn:hover,.lesson-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tabs{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem;background:var(--card);padding:.4rem;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tab-btn{flex:1 1 auto;min-width:80px;padding:.5rem .5rem;border:none;background:transparent;color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;border-radius:8px}
+.tab-btn:hover{background:#e8f5e9;color:var(--primary)}
+.tab-btn.active{background:var(--primary);color:#fff}
+.tab-content,.lesson-content{display:none}
+.tab-content.active,.lesson-content.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);padding:1.15rem;margin-bottom:.9rem;box-shadow:0 2px 10px rgba(0,0,0,.04);border:1px solid var(--border)}
+.card h2{font-size:1.08rem;color:var(--primary);margin-bottom:.65rem}
+.card h3{font-size:.95rem;color:var(--accent);margin:.8rem 0 .4rem}
+.hint{font-size:.82rem;color:var(--muted);margin:.2rem 0 .4rem}
+.skill-box{background:#e8f5e9;border-left:4px solid var(--success);padding:.8rem 1rem;border-radius:0 10px 10px 0;margin:0 0 .9rem;font-size:.88rem}
+.skill-box h4{color:var(--success);margin-bottom:.35rem;font-size:.92rem}
+.skill-box ul{margin:.25rem 0 0 1.1rem}
+.skill-box li{margin:.18rem 0}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.55rem}
+.vocab-item{background:#f0f7f2;border-radius:10px;padding:.7rem;border-left:4px solid var(--primary);cursor:pointer;transition:transform .15s}
+.vocab-item:hover{transform:translateY(-2px)}
+.vocab-hanzi{font-size:1.4rem;font-weight:700}
+.vocab-pinyin{color:var(--accent);font-size:.85rem}
+.vocab-mean{color:var(--muted);font-size:.82rem}
+.vocab-pos{font-size:.7rem;color:#888}
+.vocab-example{display:none;margin-top:.4rem;font-size:.8rem;color:#444;border-top:1px dashed var(--border);padding-top:.35rem}
+.vocab-item.open .vocab-example{display:block}
+.vocab-item.open{background:#e8f5e9}
+.radical{font-size:.75rem;color:#5a3d9a;margin-top:.15rem}
+.quiz-q{margin-bottom:.9rem;padding:.8rem;background:#f7faf8;border-radius:10px;border:1px solid var(--border)}
+.quiz-q p{margin-bottom:.4rem;font-weight:500;font-size:.92rem}
+.q-num{color:var(--primary);font-weight:700}
+.level-tag{display:inline-block;font-size:.68rem;padding:.1rem .4rem;border-radius:4px;font-weight:600;margin-left:.25rem}
+.lv-easy{background:#e6f7ed;color:#2d8a4e}.lv-mid{background:#fff3e0;color:#e65100}.lv-hard{background:#fdecea;color:#c0392b}
+.quiz-opts label{display:block;padding:.42rem .65rem;margin:.2rem 0;background:#fff;border-radius:8px;cursor:pointer;font-size:.88rem;border:1px solid transparent}
+.quiz-opts label:hover{background:#e8f5e9}
+.quiz-opts input{margin-right:.4rem}
+.btn{display:inline-block;padding:.55rem 1.2rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;margin-top:.35rem;margin-right:.3rem}
+.btn:hover{background:var(--primary-dark)}
+.btn-secondary{background:var(--accent)}.btn-secondary:hover{background:#2d6a4f}
+.feedback{margin-top:.4rem;padding:.45rem .7rem;border-radius:8px;font-size:.84rem;display:none}
+.feedback.correct{background:#e6f7ed;color:var(--success);display:block}
+.feedback.wrong{background:#fdecea;color:var(--error);display:block}
+.grammar-box{background:#eef6f1;border-left:4px solid var(--accent);padding:.85rem;border-radius:0 10px 10px 0;margin:.6rem 0;font-size:.9rem}
+.dialog-box{background:#f0f7f2;padding:1rem;border-radius:10px;margin:.5rem 0;line-height:1.85}
+.dialog-box .line{margin:.25rem 0}
+.dialog-box .cn{font-weight:600}
+.dialog-box .py{color:var(--accent);font-size:.85rem}
+.dialog-box .vi{color:var(--muted);font-size:.82rem}
+.order-box{display:flex;flex-wrap:wrap;gap:.35rem;min-height:42px;padding:.55rem;background:#f0f7f2;border-radius:10px;margin:.35rem 0;border:2px dashed var(--border)}
+.order-word{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:.28rem .5rem;border-radius:6px;cursor:pointer;font-weight:500;font-size:.88rem}
+.order-word:hover{background:#e8f5e9}
+.order-word.used{opacity:.3;pointer-events:none}
+.write-area{width:100%;min-height:70px;padding:.65rem;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;resize:vertical}
+.write-area:focus{outline:none;border-color:var(--primary)}
+.write-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.5rem;margin:.7rem 0}
+.write-card{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.6rem;text-align:center;cursor:pointer}
+.write-card .hanzi{font-size:1.7rem;font-weight:700;margin:.2rem 0}
+.write-card .pinyin{color:var(--accent);font-size:.8rem}
+.write-line{border-bottom:1.5px dashed #ccc;height:32px;margin:.2rem 0}
+.write-card.open .vocab-example{display:block!important;text-align:left;font-size:.78rem;color:#555;margin-top:.3rem}
+.speak-box{background:#eef6f1;border-radius:10px;padding:.9rem;margin:.6rem 0;border:1px solid #d0e8d8}
+.speak-box .model{background:#fff;padding:.55rem .75rem;border-radius:8px;margin:.35rem 0;border-left:3px solid var(--accent);font-size:.92rem}
+.speak-box .prompt{font-weight:600;color:var(--accent);margin-bottom:.25rem}
+.score-box{margin-top:.8rem;padding:.65rem .9rem;background:#eef6f1;border-radius:10px;font-weight:700;font-size:.95rem;color:var(--accent);display:none}
+footer{text-align:center;padding:1.2rem;color:var(--muted);font-size:.8rem}
+@media(max-width:600px){.tab-btn{font-size:.72rem;padding:.4rem .25rem;min-width:65px}.lesson-btn{font-size:.8rem;padding:.5rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>HSK 1 · Bài 1–3 · Ôn tập</h1>
+<p>新HSK教程1 · 你好 · 谢谢你 · 你叫什么名字</p>
+</header>
+<div class="container">
+<div class="lesson-nav">
+<button class="lesson-btn active" data-lesson="l1">Bài 1 · 你好</button>
+<button class="lesson-btn" data-lesson="l2">Bài 2 · 谢谢你</button>
+<button class="lesson-btn" data-lesson="l3">Bài 3 · 你叫什么名字</button>
+</div>
+
+<!-- ==================== BÀI 1 ==================== -->
+<div class="lesson-content active" id="l1">
+<div class="tabs" data-lesson-tabs="l1">
+<button class="tab-btn active" data-tab="l1-vocab">📚 Từ vựng</button>
+<button class="tab-btn" data-tab="l1-dialog">💬 Hội thoại</button>
+<button class="tab-btn" data-tab="l1-pinyin">🔊 Pinyin</button>
+<button class="tab-btn" data-tab="l1-write">✏️ Viết + Nói</button>
+<button class="tab-btn" data-tab="l1-quiz">✅ Luyện tập</button>
+</div>
+
+<div class="tab-content active" id="l1-vocab">
+<div class="card">
+<h2>📚 Từ vựng Bài 1 · 你好</h2>
+<div class="skill-box"><h4>🎯 Kỹ năng cần rèn</h4><ul>
+<li>Nhớ nghĩa + phiên âm + cách dùng lịch sự (你 / 您)</li>
+<li>Nhận biết bộ thủ cơ bản để nhớ chữ</li>
+<li>Dùng đúng trong chào hỏi và xin lỗi</li>
+</ul></div>
+<div class="vocab-grid">
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">你</div><div class="vocab-pinyin">nǐ</div><div class="vocab-mean">Bạn, anh, chị</div><div class="vocab-pos">代</div><div class="radical">部首：亻 (người)</div><div class="vocab-example">例：你好！／你妹妹。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">好</div><div class="vocab-pinyin">hǎo</div><div class="vocab-mean">Tốt, khỏe</div><div class="vocab-pos">形</div><div class="radical">部首：女 + 子</div><div class="vocab-example">例：好人。／不好。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">您</div><div class="vocab-pinyin">nín</div><div class="vocab-mean">Ngài, ông, bà (lịch sự)</div><div class="vocab-pos">代</div><div class="radical">部首：心</div><div class="vocab-example">例：爸爸，您好！／您好！</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">你们</div><div class="vocab-pinyin">nǐmen</div><div class="vocab-mean">Các bạn, các anh/chị</div><div class="vocab-pos">代</div><div class="radical">们 = 亻 + 门</div><div class="vocab-example">例：你们好！／你们两个！</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">对不起</div><div class="vocab-pinyin">duìbuqǐ</div><div class="vocab-mean">Xin lỗi</div><div class="vocab-pos">动</div><div class="radical">对 + 不 + 起</div><div class="vocab-example">例：对不起！／爸爸，对不起！</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">没关系</div><div class="vocab-pinyin">méiguānxi</div><div class="vocab-mean">Không sao, không có gì</div><div class="vocab-pos">动</div><div class="radical">没 + 关 + 系</div><div class="vocab-example">例：对不起！— 没关系！</div></div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l1-dialog">
+<div class="card">
+<h2>💬 Hội thoại Bài 1</h2>
+<div class="dialog-box">
+<p><strong>课文一</strong></p>
+<div class="line"><span class="cn">A：你好！</span> <span class="py">nǐ hǎo</span><br><span class="vi">Chào bạn!</span></div>
+<div class="line"><span class="cn">B：你好！</span> <span class="py">nǐ hǎo</span><br><span class="vi">Chào bạn!</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文二</strong></p>
+<div class="line"><span class="cn">A：您好！</span> <span class="py">nín hǎo</span><br><span class="vi">Chào ngài! (lịch sự)</span></div>
+<div class="line"><span class="cn">B：你们好！</span> <span class="py">nǐmen hǎo</span><br><span class="vi">Chào các bạn!</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文三</strong></p>
+<div class="line"><span class="cn">A：对不起！</span> <span class="py">duìbuqǐ</span><br><span class="vi">Xin lỗi!</span></div>
+<div class="line"><span class="cn">B：没关系！</span> <span class="py">méiguānxi</span><br><span class="vi">Không sao!</span></div>
+</div>
+<div class="skill-box" style="margin-top:1rem"><h4>🎯 Kỹ năng hội thoại</h4><ul>
+<li>Phân biệt <strong>你</strong> (bạn) và <strong>您</strong> (lịch sự)</li>
+<li>Trả lời xin lỗi bằng <strong>没关系</strong></li>
+<li>Đọc to, chú ý thanh 3 + thanh 3 → biến thành thanh 2 + thanh 3 (nǐ hǎo → ní hǎo)</li>
+</ul></div>
+</div>
+</div>
+
+<div class="tab-content" id="l1-pinyin">
+<div class="card">
+<h2>🔊 Pinyin &amp; Thanh điệu Bài 1</h2>
+<div class="grammar-box">
+<p><strong>Thanh điệu 4 thanh:</strong></p>
+<p>ā á ǎ à &nbsp;|&nbsp; ō ó ǒ ò &nbsp;|&nbsp; ē é ě è</p>
+<p>ī í ǐ ì &nbsp;|&nbsp; ū ú ǔ ù &nbsp;|&nbsp; ǖ ǘ ǚ ǜ</p>
+</div>
+<div class="grammar-box">
+<p><strong>Biến điệu thanh 3 + thanh 3:</strong></p>
+<p>nǐ + hǎo → <strong>ní hǎo</strong> &nbsp;|&nbsp; kě + yǐ → <strong>ké yǐ</strong></p>
+<p>Đọc: nǐ hǎo · kěyǐ · xiǎojiě · yǒuhǎo</p>
+</div>
+<div class="grammar-box">
+<p><strong>Luyện đọc:</strong> b p m f · d t n l · g k h · j q x</p>
+<p>a o e i u ü · ai ei ao ou · an en ang eng</p>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l1-write">
+<div class="card">
+<h2>✏️ Viết chữ + Nói có mẫu</h2>
+<div class="skill-box"><h4>🎯 Kỹ năng cần rèn</h4><ul>
+<li>Viết đúng nét cơ bản (横竖撇捺)</li>
+<li>Nói chào hỏi lịch sự / thân mật</li>
+<li>Phản xạ xin lỗi – đáp lại</li>
+</ul></div>
+<div class="write-grid">
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">你</div><div class="pinyin">nǐ</div><div class="radical">亻</div><div class="vocab-example">人 + 尔 → bạn</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">好</div><div class="pinyin">hǎo</div><div class="radical">女+子</div><div class="vocab-example">nữ + tử → tốt</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">您</div><div class="pinyin">nín</div><div class="radical">心</div><div class="vocab-example">lịch sự hơn 你</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">对</div><div class="pinyin">duì</div><div class="radical">又</div><div class="vocab-example">trong 对不起</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">不</div><div class="pinyin">bù</div><div class="radical">一</div><div class="vocab-example">phủ định</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">起</div><div class="pinyin">qǐ</div><div class="radical">走</div><div class="vocab-example">trong 对不起</div><div class="write-line"></div><div class="write-line"></div></div>
+</div>
+<h3>Nói có mẫu</h3>
+<div class="speak-box">
+<p class="prompt">Đọc to 3 lần · chú ý biến điệu</p>
+<div class="model">你好！ → ní hǎo</div>
+<div class="model">您好！ → nín hǎo</div>
+<div class="model">你们好！ → nǐmen hǎo</div>
+<div class="model">对不起！ — 没关系！</div>
+</div>
+<div class="speak-box">
+<p class="prompt">Tình huống: Gặp thầy cô → dùng 您</p>
+<div class="model">老师，您好！</div>
+<div class="model">爸爸，您好！</div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l1-quiz">
+<div class="card">
+<h2>✅ Luyện tập Bài 1 — 8 câu</h2>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">1.</span> “你好” dùng khi nào?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l1q1" value="A"> A. Chào bạn bè, người ngang hàng</label><label><input type="radio" name="l1q1" value="B"> B. Chỉ chào thầy cô</label><label><input type="radio" name="l1q1" value="C"> C. Chỉ chào người lớn tuổi</label></div><div class="feedback" id="fb-l1q1"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">2.</span> Muốn lịch sự hơn, dùng từ nào thay “你”?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l1q2" value="A"> A. 们</label><label><input type="radio" name="l1q2" value="B"> B. 您</label><label><input type="radio" name="l1q2" value="C"> C. 好</label></div><div class="feedback" id="fb-l1q2"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">3.</span> A nói “对不起！”, B nên trả lời?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l1q3" value="A"> A. 你好</label><label><input type="radio" name="l1q3" value="B"> B. 谢谢</label><label><input type="radio" name="l1q3" value="C"> C. 没关系</label></div><div class="feedback" id="fb-l1q3"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">4.</span> “你们好” nghĩa là?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l1q4" value="A"> A. Chào các bạn</label><label><input type="radio" name="l1q4" value="B"> B. Chào một người</label><label><input type="radio" name="l1q4" value="C"> C. Xin lỗi các bạn</label></div><div class="feedback" id="fb-l1q4"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">5.</span> nǐ + hǎo khi đọc thành?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l1q5" value="A"> A. nǐ hǎo (giữ nguyên)</label><label><input type="radio" name="l1q5" value="B"> B. ní hǎo (thanh 3→2)</label><label><input type="radio" name="l1q5" value="C"> C. nì hǎo</label></div><div class="feedback" id="fb-l1q5"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">6.</span> Chào bố mẹ / thầy cô nên dùng?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l1q6" value="A"> A. 您好</label><label><input type="radio" name="l1q6" value="B"> B. 你们好</label><label><input type="radio" name="l1q6" value="C"> C. 对不起</label></div><div class="feedback" id="fb-l1q6"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">7.</span> Sắp xếp đúng: 好 / 你 / ！<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l1q7" value="A"> A. 好你！</label><label><input type="radio" name="l1q7" value="B"> B. ！你好</label><label><input type="radio" name="l1q7" value="C"> C. 你好！</label></div><div class="feedback" id="fb-l1q7"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">8.</span> Cặp đối thoại đúng?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l1q8" value="A"> A. 对不起！— 你好！</label><label><input type="radio" name="l1q8" value="B"> B. 对不起！— 没关系！</label><label><input type="radio" name="l1q8" value="C"> C. 您好！— 没关系！</label></div><div class="feedback" id="fb-l1q8"></div></div>
+<button class="btn" onclick="checkQuiz('l1q',8)">Kiểm tra</button>
+<div class="score-box" id="score-l1q"></div>
+</div>
+</div>
+</div>
+
+<!-- ==================== BÀI 2 ==================== -->
+<div class="lesson-content" id="l2">
+<div class="tabs" data-lesson-tabs="l2">
+<button class="tab-btn active" data-tab="l2-vocab">📚 Từ vựng</button>
+<button class="tab-btn" data-tab="l2-dialog">💬 Hội thoại</button>
+<button class="tab-btn" data-tab="l2-pinyin">🔊 Pinyin</button>
+<button class="tab-btn" data-tab="l2-write">✏️ Viết + Nói</button>
+<button class="tab-btn" data-tab="l2-quiz">✅ Luyện tập</button>
+</div>
+
+<div class="tab-content active" id="l2-vocab">
+<div class="card">
+<h2>📚 Từ vựng Bài 2 · 谢谢你</h2>
+<div class="skill-box"><h4>🎯 Kỹ năng cần rèn</h4><ul>
+<li>Cảm ơn và đáp lại lịch sự</li>
+<li>Tạm biệt đúng ngữ cảnh</li>
+<li>Phủ định với 不</li>
+</ul></div>
+<div class="vocab-grid">
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">谢谢</div><div class="vocab-pinyin">xièxie</div><div class="vocab-mean">Cảm ơn</div><div class="vocab-pos">动</div><div class="radical">言 + 射 → 谢</div><div class="vocab-example">例：谢谢你！／谢谢老师！</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">不</div><div class="vocab-pinyin">bù</div><div class="vocab-mean">Không, đừng</div><div class="vocab-pos">副</div><div class="radical">一长横</div><div class="vocab-example">例：不行。／不是。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">不客气</div><div class="vocab-pinyin">bú kèqi</div><div class="vocab-mean">Đừng khách sáo, không có gì</div><div class="vocab-pos">—</div><div class="radical">客 + 气</div><div class="vocab-example">例：谢谢你！— 不客气！</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">再见</div><div class="vocab-pinyin">zàijiàn</div><div class="vocab-mean">Tạm biệt</div><div class="vocab-pos">动</div><div class="radical">再 + 见</div><div class="vocab-example">例：老师，再见！／你们再见！</div></div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l2-dialog">
+<div class="card">
+<h2>💬 Hội thoại Bài 2</h2>
+<div class="dialog-box">
+<p><strong>课文一</strong></p>
+<div class="line"><span class="cn">A：谢谢！</span> <span class="py">xièxie</span><br><span class="vi">Cảm ơn!</span></div>
+<div class="line"><span class="cn">B：不谢！</span> <span class="py">bú xiè</span><br><span class="vi">Không có gì!</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文二</strong></p>
+<div class="line"><span class="cn">A：谢谢你！</span> <span class="py">xièxie nǐ</span><br><span class="vi">Cảm ơn bạn!</span></div>
+<div class="line"><span class="cn">B：不客气！</span> <span class="py">bú kèqi</span><br><span class="vi">Không có gì!</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文三</strong></p>
+<div class="line"><span class="cn">A：再见！</span> <span class="py">zàijiàn</span><br><span class="vi">Tạm biệt!</span></div>
+<div class="line"><span class="cn">B：再见！</span> <span class="py">zàijiàn</span><br><span class="vi">Tạm biệt!</span></div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l2-pinyin">
+<div class="card">
+<h2>🔊 Pinyin Bài 2</h2>
+<div class="grammar-box">
+<p><strong>Thanh mẫu mới:</strong> zh ch sh r · z c s</p>
+<p><strong>Vận mẫu mới:</strong> ou iu · an ian uan · en in · ang iang · eng ing · ong</p>
+</div>
+<div class="grammar-box">
+<p><strong>Thanh nhẹ (轻声):</strong> âm tiết sau đọc nhẹ, ngắn</p>
+<p>xièxie · tāmen · péngyou · yīfu · wǎnshang</p>
+</div>
+<div class="grammar-box">
+<p><strong>Vị trí dấu thanh:</strong> a o e i u ü — ưu tiên a/o/e, không có thì đánh trên nguyên âm cuối</p>
+<p>xuéxiào · shǒubiǎo · xièxie · kèqi</p>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l2-write">
+<div class="card">
+<h2>✏️ Viết chữ + Nói có mẫu</h2>
+<div class="write-grid">
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">谢</div><div class="pinyin">xiè</div><div class="radical">讠</div><div class="vocab-example">言 → nói cảm ơn</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">不</div><div class="pinyin">bù</div><div class="radical">一</div><div class="vocab-example">phủ định</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">客</div><div class="pinyin">kè</div><div class="radical">宀</div><div class="vocab-example">trong 不客气</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">气</div><div class="pinyin">qì</div><div class="radical">气</div><div class="vocab-example">hơi, khí</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">再</div><div class="pinyin">zài</div><div class="radical">冂</div><div class="vocab-example">lại, lần nữa</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">见</div><div class="pinyin">jiàn</div><div class="radical">见</div><div class="vocab-example">gặp → 再见</div><div class="write-line"></div><div class="write-line"></div></div>
+</div>
+<div class="speak-box">
+<p class="prompt">Nói có mẫu — đọc to</p>
+<div class="model">谢谢你！ — 不客气！</div>
+<div class="model">谢谢老师！ — 不客气！</div>
+<div class="model">老师，再见！ — 再见！</div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l2-quiz">
+<div class="card">
+<h2>✅ Luyện tập Bài 2 — 8 câu</h2>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">1.</span> Cảm ơn bạn, nói?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l2q1" value="A"> A. 对不起</label><label><input type="radio" name="l2q1" value="B"> B. 谢谢你</label><label><input type="radio" name="l2q1" value="C"> C. 再见</label></div><div class="feedback" id="fb-l2q1"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">2.</span> Đáp lại “谢谢你”?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l2q2" value="A"> A. 不客气</label><label><input type="radio" name="l2q2" value="B"> B. 没关系</label><label><input type="radio" name="l2q2" value="C"> C. 你好</label></div><div class="feedback" id="fb-l2q2"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">3.</span> Tạm biệt thầy cô?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l2q3" value="A"> A. 谢谢老师</label><label><input type="radio" name="l2q3" value="B"> B. 老师好</label><label><input type="radio" name="l2q3" value="C"> C. 老师，再见</label></div><div class="feedback" id="fb-l2q3"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">4.</span> “不” trong “不客气” đọc thế nào?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l2q4" value="A"> A. bù (thanh 4)</label><label><input type="radio" name="l2q4" value="B"> B. bú (đổi thành thanh 2 vì sau là thanh 4)</label><label><input type="radio" name="l2q4" value="C"> C. bu (nhẹ)</label></div><div class="feedback" id="fb-l2q4"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">5.</span> xièxie — âm tiết thứ 2 là?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l2q5" value="A"> A. Thanh nhẹ</label><label><input type="radio" name="l2q5" value="B"> B. Thanh 4</label><label><input type="radio" name="l2q5" value="C"> C. Thanh 1</label></div><div class="feedback" id="fb-l2q5"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">6.</span> Cặp đúng?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l2q6" value="A"> A. 谢谢！— 没关系</label><label><input type="radio" name="l2q6" value="B"> B. 对不起！— 不客气</label><label><input type="radio" name="l2q6" value="C"> C. 谢谢你！— 不客气</label></div><div class="feedback" id="fb-l2q6"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">7.</span> “再见” gồm chữ nào?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l2q7" value="A"> A. 再 + 谢</label><label><input type="radio" name="l2q7" value="B"> B. 再 + 见</label><label><input type="radio" name="l2q7" value="C"> C. 不 + 见</label></div><div class="feedback" id="fb-l2q7"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">8.</span> Khi nào dùng “不谢”?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l2q8" value="A"> A. Đáp lại lời cảm ơn (thân mật)</label><label><input type="radio" name="l2q8" value="B"> B. Xin lỗi</label><label><input type="radio" name="l2q8" value="C"> C. Tạm biệt</label></div><div class="feedback" id="fb-l2q8"></div></div>
+<button class="btn" onclick="checkQuiz('l2q',8)">Kiểm tra</button>
+<div class="score-box" id="score-l2q"></div>
+</div>
+</div>
+</div>
+
+<!-- ==================== BÀI 3 ==================== -->
+<div class="lesson-content" id="l3">
+<div class="tabs" data-lesson-tabs="l3">
+<button class="tab-btn active" data-tab="l3-vocab">📚 Từ vựng</button>
+<button class="tab-btn" data-tab="l3-dialog">💬 Hội thoại</button>
+<button class="tab-btn" data-tab="l3-grammar">📖 Ngữ pháp</button>
+<button class="tab-btn" data-tab="l3-write">✏️ Viết + Nói</button>
+<button class="tab-btn" data-tab="l3-quiz">✅ Luyện tập</button>
+</div>
+
+<div class="tab-content active" id="l3-vocab">
+<div class="card">
+<h2>📚 Từ vựng Bài 3 · 你叫什么名字</h2>
+<div class="skill-box"><h4>🎯 Kỹ năng cần rèn</h4><ul>
+<li>Tự giới thiệu tên, nghề nghiệp, quốc tịch</li>
+<li>Hỏi tên và xác nhận thông tin bằng 吗</li>
+<li>Phủ định với 不是</li>
+</ul></div>
+<div class="vocab-grid">
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">叫</div><div class="vocab-pinyin">jiào</div><div class="vocab-mean">Gọi, tên là</div><div class="vocab-pos">动</div><div class="radical">口</div><div class="vocab-example">例：我叫李月。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">什么</div><div class="vocab-pinyin">shénme</div><div class="vocab-mean">Gì, cái gì</div><div class="vocab-pos">代</div><div class="radical">什+么</div><div class="vocab-example">例：你叫什么名字？</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">名字</div><div class="vocab-pinyin">míngzi</div><div class="vocab-mean">Tên</div><div class="vocab-pos">名</div><div class="radical">名+字</div><div class="vocab-example">例：他叫什么名字？</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">我</div><div class="vocab-pinyin">wǒ</div><div class="vocab-mean">Tôi</div><div class="vocab-pos">代</div><div class="radical">戈</div><div class="vocab-example">例：我是学生。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">是</div><div class="vocab-pinyin">shì</div><div class="vocab-mean">Là</div><div class="vocab-pos">动</div><div class="radical">日</div><div class="vocab-example">例：我是老师。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">老师</div><div class="vocab-pinyin">lǎoshī</div><div class="vocab-mean">Thầy/cô giáo</div><div class="vocab-pos">名</div><div class="radical">老+师</div><div class="vocab-example">例：他是王老师。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">吗</div><div class="vocab-pinyin">ma</div><div class="vocab-mean">Trợ từ nghi vấn</div><div class="vocab-pos">助</div><div class="radical">口</div><div class="vocab-example">例：你是学生吗？</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">学生</div><div class="vocab-pinyin">xuéshēng</div><div class="vocab-mean">Học sinh</div><div class="vocab-pos">名</div><div class="radical">学+生</div><div class="vocab-example">例：我是学生。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">人</div><div class="vocab-pinyin">rén</div><div class="vocab-mean">Người</div><div class="vocab-pos">名</div><div class="radical">人</div><div class="vocab-example">例：中国人／美国人</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">中国</div><div class="vocab-pinyin">Zhōngguó</div><div class="vocab-mean">Trung Quốc</div><div class="vocab-pos">名</div><div class="radical">中+国</div><div class="vocab-example">例：我是中国人。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">美国</div><div class="vocab-pinyin">Měiguó</div><div class="vocab-mean">Nước Mỹ</div><div class="vocab-pos">名</div><div class="radical">美+国</div><div class="vocab-example">例：他是美国人。</div></div>
+<div class="vocab-item" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">李月</div><div class="vocab-pinyin">Lǐ Yuè</div><div class="vocab-mean">Lý Nguyệt (tên)</div><div class="vocab-pos">名</div><div class="radical">—</div><div class="vocab-example">例：我叫李月。</div></div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l3-dialog">
+<div class="card">
+<h2>💬 Hội thoại Bài 3</h2>
+<div class="dialog-box">
+<p><strong>课文一</strong></p>
+<div class="line"><span class="cn">A：你叫什么名字？</span> <span class="py">nǐ jiào shénme míngzi</span><br><span class="vi">Bạn tên là gì?</span></div>
+<div class="line"><span class="cn">B：我叫李月。</span> <span class="py">wǒ jiào Lǐ Yuè</span><br><span class="vi">Tôi tên Lý Nguyệt.</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文二</strong></p>
+<div class="line"><span class="cn">A：你是老师吗？</span> <span class="py">nǐ shì lǎoshī ma</span><br><span class="vi">Bạn là giáo viên à?</span></div>
+<div class="line"><span class="cn">B：我不是老师，我是学生。</span> <span class="py">wǒ bú shì lǎoshī, wǒ shì xuéshēng</span><br><span class="vi">Tôi không phải giáo viên, tôi là học sinh.</span></div>
+</div>
+<div class="dialog-box">
+<p><strong>课文三</strong></p>
+<div class="line"><span class="cn">A：你是中国人吗？</span> <span class="py">nǐ shì Zhōngguó rén ma</span><br><span class="vi">Bạn là người Trung Quốc à?</span></div>
+<div class="line"><span class="cn">B：我不是中国人，我是美国人。</span> <span class="py">wǒ bú shì Zhōngguó rén, wǒ shì Měiguó rén</span><br><span class="vi">Tôi không phải người Trung Quốc, tôi là người Mỹ.</span></div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l3-grammar">
+<div class="card">
+<h2>📖 Ngữ pháp Bài 3</h2>
+<div class="grammar-box">
+<p><strong>1. 什么</strong> — đại từ nghi vấn “gì”</p>
+<p>你叫<strong>什么</strong>名字？／这是<strong>什么</strong>？／这是<strong>什么</strong>书？</p>
+</div>
+<div class="grammar-box">
+<p><strong>2. Câu 是</strong> — phán đoán “là”</p>
+<p>我<strong>是</strong>学生。／他<strong>是</strong>老师。／我<strong>不是</strong>中国人。</p>
+<p>Phủ định: 不 + 是 → 不是 (bú shì)</p>
+</div>
+<div class="grammar-box">
+<p><strong>3. Câu hỏi với 吗</strong></p>
+<p>Câu trần thuật + 吗？</p>
+<p>你是学生<strong>吗</strong>？／你是中国人<strong>吗</strong>？</p>
+</div>
+<div class="grammar-box">
+<p><strong>4. Biến điệu của 不</strong></p>
+<p>不 + thanh 1/2/3 → bù &nbsp;|&nbsp; 不 + thanh 4 → <strong>bú</strong></p>
+<p>bú shì · bú kèqi · bù hǎo · bù xíng</p>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l3-write">
+<div class="card">
+<h2>✏️ Viết chữ + Nói có mẫu</h2>
+<div class="write-grid">
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">我</div><div class="pinyin">wǒ</div><div class="radical">戈</div><div class="vocab-example">tôi</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">是</div><div class="pinyin">shì</div><div class="radical">日</div><div class="vocab-example">là</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">叫</div><div class="pinyin">jiào</div><div class="radical">口</div><div class="vocab-example">gọi tên</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">名</div><div class="pinyin">míng</div><div class="radical">夕</div><div class="vocab-example">trong 名字</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">字</div><div class="pinyin">zì</div><div class="radical">子</div><div class="vocab-example">chữ, tên</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">学</div><div class="pinyin">xué</div><div class="radical">子</div><div class="vocab-example">học</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">生</div><div class="pinyin">shēng</div><div class="radical">生</div><div class="vocab-example">sinh, sống</div><div class="write-line"></div><div class="write-line"></div></div>
+<div class="write-card" onclick="this.classList.toggle('open')"><div class="hanzi">老</div><div class="pinyin">lǎo</div><div class="radical">老</div><div class="vocab-example">trong 老师</div><div class="write-line"></div><div class="write-line"></div></div>
+</div>
+<div class="speak-box">
+<p class="prompt">Tự giới thiệu — nói theo mẫu</p>
+<div class="model">我叫______。我是学生。我是越南人。</div>
+<div class="model">你叫什么名字？ — 我叫______。</div>
+<div class="model">你是老师吗？ — 我不是老师，我是学生。</div>
+<div class="model">你是中国人吗？ — 我不是中国人，我是越南人。</div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="l3-quiz">
+<div class="card">
+<h2>✅ Luyện tập Bài 3 — 10 câu</h2>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">1.</span> Hỏi tên người khác?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l3q1" value="A"> A. 你是什么？</label><label><input type="radio" name="l3q1" value="B"> B. 你叫什么名字？</label><label><input type="radio" name="l3q1" value="C"> C. 你是名字吗？</label></div><div class="feedback" id="fb-l3q1"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">2.</span> “我是学生” nghĩa?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l3q2" value="A"> A. Tôi là học sinh</label><label><input type="radio" name="l3q2" value="B"> B. Tôi gọi học sinh</label><label><input type="radio" name="l3q2" value="C"> C. Tôi không phải học sinh</label></div><div class="feedback" id="fb-l3q2"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">3.</span> Phủ định của “我是老师”?<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="l3q3" value="A"> A. 我不老师</label><label><input type="radio" name="l3q3" value="B"> B. 我是不老师</label><label><input type="radio" name="l3q3" value="C"> C. 我不是老师</label></div><div class="feedback" id="fb-l3q3"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">4.</span> Thêm 吗 vào câu nào đúng?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l3q4" value="A"> A. 吗你是学生？</label><label><input type="radio" name="l3q4" value="B"> B. 你是学生吗？</label><label><input type="radio" name="l3q4" value="C"> C. 你是吗学生？</label></div><div class="feedback" id="fb-l3q4"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">5.</span> “中国人” nghĩa?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l3q5" value="A"> A. Người Trung Quốc</label><label><input type="radio" name="l3q5" value="B"> B. Người Mỹ</label><label><input type="radio" name="l3q5" value="C"> C. Giáo viên Trung Quốc</label></div><div class="feedback" id="fb-l3q5"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">6.</span> 不 + 是 đọc thành?<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="l3q6" value="A"> A. bù shì</label><label><input type="radio" name="l3q6" value="B"> B. bu shì</label><label><input type="radio" name="l3q6" value="C"> C. bú shì</label></div><div class="feedback" id="fb-l3q6"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">7.</span> Trả lời “你是老师吗？” nếu bạn là học sinh?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l3q7" value="A"> A. 我是老师</label><label><input type="radio" name="l3q7" value="B"> B. 我不是老师，我是学生</label><label><input type="radio" name="l3q7" value="C"> C. 我叫学生</label></div><div class="feedback" id="fb-l3q7"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">8.</span> “什么” có thể đứng?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l3q8" value="A"> A. Trước danh từ hoặc một mình làm tân ngữ</label><label><input type="radio" name="l3q8" value="B"> B. Chỉ ở cuối câu</label><label><input type="radio" name="l3q8" value="C"> C. Chỉ sau 是</label></div><div class="feedback" id="fb-l3q8"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">9.</span> Tự giới thiệu đúng?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l3q9" value="A"> A. 我叫是李月</label><label><input type="radio" name="l3q9" value="B"> B. 我是叫学生</label><label><input type="radio" name="l3q9" value="C"> C. 我叫李月，我是学生</label></div><div class="feedback" id="fb-l3q9"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">10.</span> Câu nào đúng ngữ pháp?<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="l3q10" value="A"> A. 你是吗中国人？</label><label><input type="radio" name="l3q10" value="B"> B. 你是中国人吗？</label><label><input type="radio" name="l3q10" value="C"> C. 吗你是中国人？</label></div><div class="feedback" id="fb-l3q10"></div></div>
+<button class="btn" onclick="checkQuiz('l3q',10)">Kiểm tra</button>
+<div class="score-box" id="score-l3q"></div>
+</div>
+</div>
+</div>
+
+</div>
+<footer>HSK 1 · Bài 1–3 · 新HSK教程1 · Ôn tập tương tác</footer>
+
+<script>
+// Lesson switch
+document.querySelectorAll('.lesson-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.lesson-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.lesson-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.lesson).classList.add('active');
+  });
+});
+// Tab switch within lesson
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const parent=btn.closest('.lesson-content');
+    parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    parent.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    const tab=document.getElementById(btn.dataset.tab);
+    if(tab) tab.classList.add('active');
+  });
+});
+function checkQuiz(prefix,total){
+  let score=0;
+  for(let i=1;i<=total;i++){
+    const name=prefix+i;
+    const qEl=document.querySelector(`input[name="${name}"]`)?.closest('.quiz-q');
+    if(!qEl) continue;
+    const correct=qEl.dataset.ans;
+    const selected=document.querySelector(`input[name="${name}"]:checked`);
+    const fb=document.getElementById('fb-'+name);
+    if(!selected){fb.className='feedback wrong';fb.textContent='⚠️ Chưa chọn.';continue}
+    if(selected.value===correct){fb.className='feedback correct';fb.textContent='✅ Đúng!';score++}
+    else{fb.className='feedback wrong';fb.textContent='❌ Sai. Đáp án: '+correct}
+  }
+  const box=document.getElementById('score-'+prefix);
+  if(box){box.style.display='block';box.textContent='📊 Điểm: '+score+'/'+total+(score===total?' — Giỏi lắm!':score>=total*0.7?' — Khá!':' — Ôn lại nhé!')}
+}
+</script>
+</body>
+</html>
